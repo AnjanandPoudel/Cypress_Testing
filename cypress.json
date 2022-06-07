@@ -1,6 +1,5 @@
 { "chromeWebSecurity": false,
     "firefoxWebSecurity":false,
     "viewportWidth": 1450,
-    "viewportHeight": 660,
-    "baseUrl": "https://app.restrox.co/Restrox"
-  }
+    "viewportHeight": 660
+}
