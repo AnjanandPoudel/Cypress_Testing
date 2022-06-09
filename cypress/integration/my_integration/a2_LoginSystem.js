@@ -1,10 +1,18 @@
-export let rowsLength;
+import { ReadExcel, RowLen } from "./EXCEL";
+import { ExcelSystem } from "./EXCELPromiseResolver";
+
+let rowsLength=0;
+const PromiseResolver=async()=>{
+    let rows=await RowLen()
+    console.log(rows)
+    rowsLength=rows.length
+}
+
+
 export const loginFunctionGlobal=()=>{
+    
     before(() => {
-        cy.task('readXlsx',{file:'cypress/fixtures/excelData.xlsx',sheet:"Sheet1"}).then((rows)=>{
-          rowsLength=rows.length
-          cy.writeFile("cypress/fixtures/xlsxData.json",{rows})
-        })
+        PromiseResolver()
         cy.visit('https://app.restrox.co');
         // cy.contains('type').click({force:true}).first();
 
@@ -19,6 +27,8 @@ export const loginFunctionGlobal=()=>{
           .type(data.rows[1].password)
         })
         cy.xpath('//*[@id="root"]/div[1]/div/div/div/div/div/div/div/form/div[4]/button').click({force:true}).first()
+
+        cy.wait(500)
 
     // Gone to Restrox
         cy.url().should('include','/Restrox').then(()=>{
@@ -35,6 +45,7 @@ export const loginFunctionGlobal=()=>{
 
 
         cy.saveLocalStorage();
+        
        
       
       })
@@ -101,54 +112,11 @@ describe('Completed Login System',()=>{
     loginFunctionGlobal()
 
       it('Dashboard',()=>{
+        cy.wait(300)
         cy.contains('Dashboard').click({force:true}).first()
-     cy.wait(300) })
+        console.log(rowsLength)
+      })
 
-      it('POS',()=>{
-        cy.contains('POS').click({force:true}).first()
-   cy.wait(300)   })      
-
-      it('Activity',()=>{
-        cy.contains('Activity').click({force:true}).first()
-   cy.wait(300)   })      
-      it('Menu',()=>{
-        cy.contains('Menu').click({force:true}).first()
-   cy.wait(300)   })      
-
-      it('Inventory',()=>{
-        cy.contains('Inventory').click({force:true}).first()
-   cy.wait(300)   })      
-
-      it('Account',()=>{
-        cy.contains('Account').click({force:true}).first()
-   cy.wait(300)   })      
-      it('Staff',()=>{
-      cy.contains('Staff').click({force:true}).first()
-   cy.wait(300)   })      
-
-      it('Table and Space',()=>{
-        cy.contains('Table').click({force:true}).first()
-   cy.wait(300)   })      
-
-      it('Department',()=>{
-        cy.contains('Department').click({force:true}).first()
-   cy.wait(300)   })      
-      it('Setting',()=>{
-        cy.contains('Setting').click({force:true}).first()
-   cy.wait(300)   })      
-
-      it('Anuvab',()=>{
-        cy.contains('Anuvab').click({force:true}).first()
-   cy.wait(300)   })      
-
-      it('Owner',()=>{
-        cy.contains('Owner').click({force:true}).first()
-   cy.wait(300)   })      
-        
-
-
-
-    
 })
 
 

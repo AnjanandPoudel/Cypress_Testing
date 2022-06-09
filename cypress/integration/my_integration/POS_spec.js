@@ -1,3 +1,4 @@
+import { loginFunctionGlobal } from "./a2_LoginSystem";
 
 
   
@@ -8,38 +9,45 @@ describe('My First System',()=>{
     let customerToSearch="anubhav";
     let staffToSearch="anuvab";
 
-    beforeEach('beforeEach',()=>{
-        // cy.visit('https://app.restrox.co/Restrox');
-        cy.visit('https://beta.restrox.co/login');
-        // cy.contains('type').click();
-        
-        cy.url()
-        .should('include','/login');
+   loginFunctionGlobal()
 
-        cy.get('[name=loginEmail]')
-        .type('testblacktech2@gmail.com')
-        .should('have.value',"testblacktech2@gmail.com")
+   it('Dashboard',()=>{
+    cy.wait(300)
+    cy.contains('Dashboard').click({force:true}).first()
+ cy.wait(300) })
 
-        cy.get('[name=password]')
-        .type('123456789')
-        .should('have.value',"123456789")
+  it('POS',()=>{
+    cy.contains('POS').click({force:true}).first()
+cy.wait(300)   })      
 
-        cy.xpath('//*[@id="root"]/div[1]/div/div/div/div/div/div/div/form/div[4]/button').click()
+  it('Activity',()=>{
+    cy.contains('Activity').click({force:true}).first()
+cy.wait(300)   })      
+  it('Menu',()=>{
+    cy.contains('Menu').click({force:true}).first()
+cy.wait(300)   })      
 
-    // Gone to Restrox
-        cy.url().should('include','/Restrox');
-        cy.xpath('//*[@id="navcontainnavnav"]/li[4]/a').click()
-    })
+  it('Inventory',()=>{
+    cy.contains('Inventory').click({force:true}).first()
+cy.wait(300)   })      
 
-    
+  it('Account',()=>{
+    cy.contains('Account').click({force:true}).first()
+cy.wait(300)   })      
+  it('Staff',()=>{
+  cy.contains('Staff').click({force:true}).first()
+cy.wait(300)   })      
 
-    // it('Menu creation checking',()=>{
-    //     expect(true).to.equals(true)
+  it('Table and Space',()=>{
+    cy.contains('Table').click({force:true}).first()
+cy.wait(300)   })      
 
-    //     // cy.pause()
-    // })
-
-
+  it('Department',()=>{
+    cy.contains('Department').click({force:true}).first()
+cy.wait(300)   })      
+  it('Setting',()=>{
+    cy.contains('Setting').click({force:true}).first()
+cy.wait(300)   })      
 
 
     it('Table Add Order :For POS, AddOrder then Search Tables and AddDishes/Order and Checkout',()=>{

@@ -30,3 +30,6 @@ Cypress.Commands.add('login',()=>{
 Cypress.Commands.add("parseXlsx",(inputFile)=>{
     return cy.task('parseXlsx',{filePath:inputFile})
 })
+
+
+
