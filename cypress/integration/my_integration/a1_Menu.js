@@ -1,44 +1,20 @@
+import { loginFunctionGlobal } from "./a2_LoginSystem";
 
 
 let rowsLength;
 describe('My First System',()=>{
-    let menuItem="softdrinks";
-    let menuDescription="NewDrinks is added";
-    let tableToSearch="table007";
-    let customerToSearch="anubhav";
-    let staffToSearch="anuvab";
-    let ElementCategory="non"
-    let updatedCategoryName="new y"
-    let updatedCategoryDescription="VeganDescriptionEdited"
-    let CategoryToDelete="199"
-    let CategoryToEdit="C198"
+    // let menuItem="softdrinks";
+    // let menuDescription="NewDrinks is added";
+    // let tableToSearch="table007";
+    // let customerToSearch="anubhav";
+    // let staffToSearch="anuvab";
+    // let ElementCategory="non"
+    // let updatedCategoryName="new y"
+    // let updatedCategoryDescription="VeganDescriptionEdited"
+    // let CategoryToDelete="199"
+    // let CategoryToEdit="C198"
 
-    beforeEach('beforeEach',()=>{
-
-        cy.task('readXlsx',{file:'cypress/fixtures/excelData.xlsx',sheet:"Sheet1"}).then((rows)=>{
-            rowsLength=rows.length;
-            cy.writeFile("cypress/fixtures/xlsxData.json",{rows})
-          })
-
-        cy.visit('https://app.restrox.co/Restrox');
-        // cy.contains('type').click();
-        
-        cy.url()
-        .should('include','/login');
-
-        cy.get('[name=loginEmail]')
-        .type('testblacktech2@gmail.com')
-        .should('have.value',"testblacktech2@gmail.com")
-
-        cy.get('[name=password]')
-        .type('123456789')
-        .should('have.value',"123456789")
-
-        cy.xpath('//*[@id="root"]/div[1]/div/div/div/div/div/div/div/form/div[4]/button').click()
-
-    // Gone to Restrox
-        cy.url().should('include','/Restrox');
-    })
+    loginFunctionGlobal()
     
     
     it('Menu Creation Here',()=>{

@@ -8,9 +8,7 @@ const PromiseResolver=async()=>{
     rowsLength=rows.length
 }
 
-
 export const loginFunctionGlobal=()=>{
-    
     before(() => {
         PromiseResolver()
         cy.visit('https://app.restrox.co');
@@ -21,13 +19,12 @@ export const loginFunctionGlobal=()=>{
 
         cy.fixture('xlsxData').then((data)=>{
           cy.get('[name=loginEmail]')
-          .type(data.rows[1].email)
+          .type(data.rows[0].email)
   
           cy.get('[name=password]')
-          .type(data.rows[1].password)
+          .type(data.rows[0].password)
         })
         cy.xpath('//*[@id="root"]/div[1]/div/div/div/div/div/div/div/form/div[4]/button').click({force:true}).first()
-
         cy.wait(500)
 
     // Gone to Restrox
@@ -39,15 +36,9 @@ export const loginFunctionGlobal=()=>{
             token =(((token)))
             userData =((JSON.parse(userData)))
             restaurant =((JSON.parse(restaurant)))
-    
             console.log(token,userData,restaurant)
         })
-
-
         cy.saveLocalStorage();
-        
-       
-      
       })
 
     beforeEach(() => {
@@ -58,7 +49,6 @@ export const loginFunctionGlobal=()=>{
         cy.saveLocalStorage();
     });
 }
-
 /*  function loginFunction(){
     before(() => {
         cy.visit('https://app.restrox.co');
@@ -106,21 +96,6 @@ export const loginFunctionGlobal=()=>{
 
 } */
   
-
-describe('Completed Login System',()=>{
-   
-    loginFunctionGlobal()
-
-      it('Dashboard',()=>{
-        cy.wait(300)
-        cy.contains('Dashboard').click({force:true}).first()
-        console.log(rowsLength)
-      })
-
+describe(`Advanced_2.0 Login System `,()=>{
+      
 })
-
-
-
-
-
-
