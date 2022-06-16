@@ -1,8 +1,17 @@
 import { loginFunctionGlobal } from "./a2_LoginSystem";
+
+let rowsLength=1;
+const PromiseResolver=async()=>{
+    let rows=await RowLen()
+    console.log(rows)
+    rowsLength=rows.length
+}
+
 // cy.get(':nth-child(3) > .mt-2')
 const AddOrderFunction=(classesName,NameofTask)=>{
         it(`${NameofTask}`+'Table Add Order :For POS, AddOrder then Search Tables and AddDishes/Order and Checkout',()=>{
         cy.fixture('xlsxData').then((data)=>{
+            for(let i=0; i<rowsLength; i++){
             // For POS, AddOrder then Search Tables and AddDishes/Order and Checkout
             //click POS
             cy.xpath('//*[@id="navcontainnavnav"]/li[2]/a').click({force: true})
@@ -13,7 +22,7 @@ const AddOrderFunction=(classesName,NameofTask)=>{
             // first tables should be visible 
             cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[2]/div/div[1]/div[1]/div[1]/div/div[1]').should('be.visible')
             //type tablename
-            cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[2]/div/div[2]/input').type(data.rows[0].tableToSearch).trigger('search')
+            cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[2]/div/div[2]/input').type(data.rows[i].tableToSearch).trigger('search')
             .then(()=>{
                 //click on the first table Search
                 cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[2]/div/div[1]/div[1]/div[1]/div/div[1]').click()
@@ -32,18 +41,19 @@ const AddOrderFunction=(classesName,NameofTask)=>{
             cy.xpath('/html/body/div[2]/div/div[1]/div/div/div/div[2]/div[1]/button').click() 
             
             cy.wait(500)
-        })
+         }
+
+         })
     })
     
-
-
-
-
 
     
     it(`${NameofTask}`+'Customer Add Order :For POS, AddOrder then Search Customer and AddDishes/Order and Checkout',()=>{
 // For POS, AddOrder then Search Customer and AddDishes/Order and Checkout
+
         cy.fixture('xlsxData').then((data)=>{
+            for(let i=0; i<rowsLength; i++){
+
             //click POS
             cy.xpath('//*[@id="navcontainnavnav"]/li[2]/a').click({force: true})
             //Click Add order
@@ -56,14 +66,55 @@ const AddOrderFunction=(classesName,NameofTask)=>{
             cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[2]/div/div[1]/div[1]/div[1]').should('be.visible')
             //type tablename
             cy.wait(100)
-            cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[2]/div/div[3]/input').type(data.rows[0].customerToSearch).then(()=>{
+            cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[2]/div/div[3]/input').type(data.rows[i].customerToSearch).then(()=>{
                     //click on the first table Search
                 cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[2]/div/div[1]/div[1]/div[1]').click()
 
             })
             //select dishes
             cy.xpath('/html/body/div[3]/div/div[1]/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div/div/div[2]/div[2]/div[1]/span[1]').click()
-        
+            cy.xpath('/html/body/div[3]/div/div[1]/div/div/div/div[2]/div/div[2]/div/div/div[3]/div[2]/button[2]').click()
+            // Are u sure? Confirm
+            cy.xpath('/html/body/div[4]/div/div[1]/div/div/div/div[2]/button[2]').click()
+            //Checkout
+            cy.xpath('/html/body/div/div[1]/div[2]/div[3]/div[1]/div/div[2]/div/div/div[2]/div[2]/button').click()
+            // Proceed payment
+            cy.get('.PaymentModal_footer__1Y0t2 > .btn-primary').click() // Proceed payment
+            //Ok
+            cy.xpath('/html/body/div[2]/div/div[1]/div/div/div/div[2]/div[1]/button').click() 
+            cy.wait(500)
+        }
+        })
+   
+    })
+    
+
+
+    it(`${NameofTask}`+'Staff Add Order, For POS, AddOrder then Search Staff and AddDishes/Order and Checkout',()=>{
+        cy.fixture('xlsxData').then((data)=>{
+            for(let i=0; i<rowsLength; i++){
+            // For POS, AddOrder then Search Staff and AddDishes/Order and Checkout
+            //click POS
+            cy.xpath('//*[@id="navcontainnavnav"]/li[2]/a').click({force: true})
+            //Click Add order
+            cy.xpath('//*[@id="root"]/div[1]/div[3]/div[3]/div/div/div[1]/div/div[2]/div[3]/button[2]').click({force: true})
+            //Click Customer
+            cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[1]/div/button[2]').click({force: true})
+            //Click Staff
+            cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[1]/div/button[3]').click();
+            //search in Staff/Pos
+            cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[2]/div/div[3]/input').click()
+            // first tables should be visible 
+            cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[2]/div/div[1]/div[1]/div[1]').should('be.visible')
+            //type tablename
+            cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[2]/div/div[3]/input').type(data.rows[i].staffToSearch).trigger('search')
+            // cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[2]/div/div[3]/input').type(staffToSearch).should('have.value',staffToSearch);
+            //click on the first table Search
+            cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[2]/div/div[1]/div[1]/div[1]').click()
+            //select dishes
+            cy.xpath('/html/body/div[3]/div/div[1]/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div/div/div[2]/div[2]/div[1]/span[1]').click()
+            cy.xpath('/html/body/div[3]/div/div[1]/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div/div/div[2]/div[2]/div[1]/span[1]').click()
+            //confirm
             cy.xpath('/html/body/div[3]/div/div[1]/div/div/div/div[2]/div/div[2]/div/div/div[3]/div[2]/button[2]').click()
             // Are u sure? Confirm
             cy.xpath('/html/body/div[4]/div/div[1]/div/div/div/div[2]/button[2]').click()
@@ -75,49 +126,7 @@ const AddOrderFunction=(classesName,NameofTask)=>{
             cy.xpath('/html/body/div[2]/div/div[1]/div/div/div/div[2]/div[1]/button').click() 
             
             cy.wait(500)
-        
-        })
-   
-    })
-    
-
-
-    it(`${NameofTask}`+'Staff Add Order, For POS, AddOrder then Search Staff and AddDishes/Order and Checkout',()=>{
-        cy.fixture('xlsxData').then((data)=>{
-
-        // For POS, AddOrder then Search Staff and AddDishes/Order and Checkout
-        //click POS
-        cy.xpath('//*[@id="navcontainnavnav"]/li[2]/a').click({force: true})
-        //Click Add order
-        cy.xpath('//*[@id="root"]/div[1]/div[3]/div[3]/div/div/div[1]/div/div[2]/div[3]/button[2]').click({force: true})
-        //Click Customer
-        cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[1]/div/button[2]').click({force: true})
-        //Click Staff
-        cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[1]/div/button[3]').click();
-        //search in Staff/Pos
-        cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[2]/div/div[3]/input').click()
-        // first tables should be visible 
-        cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[2]/div/div[1]/div[1]/div[1]').should('be.visible')
-          //type tablename
-          cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[2]/div/div[3]/input').type(data.rows[0].staffToSearch).trigger('search')
-          // cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[2]/div/div[3]/input').type(staffToSearch).should('have.value',staffToSearch);
-          //click on the first table Search
-          cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div/div/div[2]/div/div[1]/div[1]/div[1]').click()
-          //select dishes
-          cy.xpath('/html/body/div[3]/div/div[1]/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div/div/div[2]/div[2]/div[1]/span[1]').click()
-          cy.xpath('/html/body/div[3]/div/div[1]/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div/div/div[2]/div[2]/div[1]/span[1]').click()
-          //confirm
-          cy.xpath('/html/body/div[3]/div/div[1]/div/div/div/div[2]/div/div[2]/div/div/div[3]/div[2]/button[2]').click()
-          // Are u sure? Confirm
-          cy.xpath('/html/body/div[4]/div/div[1]/div/div/div/div[2]/button[2]').click()
-          //Checkout
-          cy.xpath('/html/body/div/div[1]/div[2]/div[3]/div[1]/div/div[2]/div/div/div[2]/div[2]/button').click()
-          // Proceed payment
-          cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/button[1]').click() // Proceed payment
-          //Ok
-          cy.xpath('/html/body/div[2]/div/div[1]/div/div/div/div[2]/div[1]/button').click() 
-        
-          cy.wait(500)
+            }
         })
     })
 
@@ -149,9 +158,6 @@ const AddOrderFunction=(classesName,NameofTask)=>{
    })
 
 
-
-  
-
     it('Drafts',()=>{
         // For POS, AddOrder then Search Staff and Add Reservation and Checkout
          //click POS
@@ -159,7 +165,6 @@ const AddOrderFunction=(classesName,NameofTask)=>{
         //Click Add order
         cy.get('.pos_moreVerticalButton__27eSQ').click()
         cy.get(':nth-child(1) > .pos_dropDownItem__3Vwcs').click()
-
    })
 
     it('History',()=>{
@@ -170,7 +175,6 @@ const AddOrderFunction=(classesName,NameofTask)=>{
         cy.get('.active > .d-flex').click()
         cy.get('.pos_moreVerticalButton__27eSQ').click()
         cy.get(':nth-child(2) > .pos_dropDownItem__3Vwcs').click()
-
    })
 
     it('Summary',()=>{
@@ -180,7 +184,6 @@ const AddOrderFunction=(classesName,NameofTask)=>{
         //Click Add order
         cy.get('.pos_moreVerticalButton__27eSQ').click()
         cy.get(':nth-child(3) > .pos_dropDownItem__3Vwcs').click()
-
    })
 }
   
@@ -194,11 +197,12 @@ describe('My First System',()=>{
 
     })
 
+    it('RowsLength Excel Import',()=>{
+        PromiseResolver()
+    })
+
     AddOrderFunction('.ms-1.btn','Clicking AddOrder====')
     AddOrderFunction(':nth-child(3) > .mt-2','Clicking Place Order====')
-
-
-
 
     it('Quick Order',()=>{
         // For POS, AddOrder then Search Staff and Add Reservation and Checkout
@@ -216,12 +220,8 @@ describe('My First System',()=>{
         cy.get('.PaymentModal_footer__1Y0t2 > .btn-primary').click()
         //save it
         cy.get('.CheckoutBillModal_saveButton__322vw > .btn').click() 
-        
         cy.wait(500)
 
-   })
-
-
-   
+   }) 
 })
 

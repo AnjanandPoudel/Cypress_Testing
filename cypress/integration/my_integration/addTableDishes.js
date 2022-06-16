@@ -33,19 +33,13 @@ describe('My First System',()=>{
         // Act - take an action
         //  interact - make an assertion/claim/
         // - make an assertion about page content  
-
         // cy.pause();
-
         // cy.intercept({
         //     method: 'GET',
         //     url: '',
         //     hostname: 'app-restrox-co.web.app',
         //   })
-
         // cy.wait('@createUser', { timeout: 10000});
-
- 
-
 
 
  // For POS, AddOrder then Search Tables and AddDishes/Order and Checkout
