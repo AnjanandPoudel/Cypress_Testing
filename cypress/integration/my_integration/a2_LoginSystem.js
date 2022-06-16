@@ -97,5 +97,5 @@ export const loginFunctionGlobal=()=>{
 } */
   
 describe(`Advanced_2.0 Login System `,()=>{
-      
+      loginFunctionGlobal()
 })

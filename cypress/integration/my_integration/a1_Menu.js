@@ -1,76 +1,32 @@
 import { loginFunctionGlobal } from "./a2_LoginSystem";
+import { RowLen } from "./EXCEL";
 
+let rowsLength=1;
+const PromiseResolver=async()=>{
+    let rows=await RowLen()
+    console.log(rows)
+    rowsLength=rows.length
+}
 
-let rowsLength;
 describe('My First System',()=>{
-    // let menuItem="softdrinks";
-    // let menuDescription="NewDrinks is added";
-    // let tableToSearch="table007";
-    // let customerToSearch="anubhav";
-    // let staffToSearch="anuvab";
-    // let ElementCategory="non"
-    // let updatedCategoryName="new y"
-    // let updatedCategoryDescription="VeganDescriptionEdited"
-    // let CategoryToDelete="199"
-    // let CategoryToEdit="C198"
+    let menuItem="softdrinks";
+    let menuDescription="NewDrinks is added";
+    let tableToSearch="table007";
+    let customerToSearch="anubhav";
+    let staffToSearch="anuvab";
+    let ElementCategory="non";
+    let updatedCategoryName="new y";
+    let updatedCategoryDescription="VeganDescriptionEdited";
+    let CategoryToDelete="199";
+    let CategoryToEdit="C198";
 
     loginFunctionGlobal()
     
-    
-    it('Menu Creation Here',()=>{
-        cy.fixture('xlsxData').then((data)=>{
-            for(let i=0; i<rowsLength;i++){
-                    //Menu //Menu created Successfully
-                cy.xpath('//*[@id="navcontainnavnav"]/li[4]/a').click()
-                cy.url().should('include','/digitalMenu');
-                //create memnu
-                cy.xpath('//*[@id="root"]/div[1]/div[3]/div[3]/div[2]/div/div/div[2]/div/div[1]/div[1]/div/button/span').click()
-                cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[4]/div[1]/div/input').type(data.rows[i].menuItem).should('have.value',data.rows[i].menuItem)
-                cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[4]/div[2]/div/textarea').type(data.rows[i].menuDescription).should('have.value',data.rows[i].menuDescription)
-                cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[5]/div/button').click()
-                cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[1]/button').click()
-            }
-        })
-    })
- 
- 
-   
-    it('Inside Menu, In All Dishes, a dish is searched then updated and deleted',()=>{
-        // For POS, AddOrder then Search Tables and AddDishes/Order and Checkout
-        //click POS
-        cy.fixture('xlsxData').then((data)=>{
-            for(let i=0; i<rowsLength; i++){
-                cy.xpath('//*[@id="navcontainnavnav"]/li[4]/a').click()
-                cy.url().should('include','/digitalMenu');
-                //All dishes
-                cy.xpath('//*[@id="root"]/div[1]/div[3]/div[3]/div[1]/div/div/div/div[2]/a[2]').click();
-                //Search dishes
-                cy.xpath('/html/body/div/div[1]/div[3]/div[3]/div[2]/div/div/div[2]/div[1]/div[1]/div/div[1]/div/div/input').click();
-                cy.xpath('/html/body/div/div[1]/div[3]/div[3]/div[2]/div/div/div[2]/div[1]/div[1]/div/div[1]/div/div/input').type(data.rows[i].dishToSearch);   
-                //Click actions
-                cy.wait(1000)
-                cy.xpath('/html/body/div/div[1]/div[3]/div[3]/div[2]/div/div/div[2]/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[8]/div/div/span').click()
-                //Click Details
-                cy.xpath('/html/body/div/div[1]/div[3]/div[3]/div[2]/div/div/div[2]/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[8]/div/div/div/button/span').should('be.visible').click()
-                //Change Price
-                cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/div[3]/input').type(data.rows[i].dishPrice);
-                //Update
-                cy.xpath('/html/body/div[2]/div/div[1]/div/div/div[3]/span/button').click()
-                //Click actions
-                cy.xpath('/html/body/div/div[1]/div[3]/div[3]/div[2]/div/div/div[2]/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[8]/div/div/span').click()
-                //Click Delete
-                cy.xpath('/html/body/div/div[1]/div[3]/div[3]/div[2]/div/div/div[2]/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[8]/div/div/div/a/span').should('be.visible').click()
-                //Yes delete it
-                cy.xpath('/html/body/div[2]/div/div[6]/button[1]').click()
-                cy.wait(1000);
-
-            }
-        })
-    })
-
 
 
     it('Inside Menu, In All Dishes, a dish is created',()=>{
+        PromiseResolver()
+
 // For POS, AddOrder then Search Tables and AddDishes/Order and Checkout
         //click POS
         cy.fixture('xlsxData').then((data)=>{
@@ -104,9 +60,6 @@ describe('My First System',()=>{
     })
 
 
-
-
-   
     it('Menu-> Category is created ',()=>{
     // For POS, AddOrder then Search Tables and AddDishes/Order and Checkout
         //click POS
@@ -164,7 +117,6 @@ it('Menu-> Category is Edited using Contains',()=>{
     })
 
 
-        
 it('Menu-> Category is Deleted using Contains',()=>{
     // For POS, AddOrder then Search Tables and AddDishes/Order and Checkout
         //click POS
@@ -193,11 +145,6 @@ it('Menu-> Category is Deleted using Contains',()=>{
     })
 
        
-
-
-    
-
-   
     // it('Menu-> Category is Clicked ',()=>{
     // // For POS, AddOrder then Search Tables and AddDishes/Order and Checkout
     //     //click POS
@@ -303,8 +250,6 @@ it('Menu-> Category is Deleted using Contains',()=>{
     //             cy.wait(1000)
     //     })
     // }) */
-
-   
 })
 
 
