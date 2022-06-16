@@ -1,6 +1,14 @@
 {
   "rows": [
     {
+      "staffDepartment": "Department",
+      "staffPosition": "Waiter",
+      "staffAddress": "lekhnath",
+      "staffRoles": "Receptionist",
+      "staffContact": 123456789,
+      "staffFullName": "leo",
+      "staffEmail": "anjan.blacktech@gmail.com",
+      "emailForStaffInvite": "anjan.blacktech@gmail.com",
       "dishToSearch": "momo1",
       "password": 123456789,
       "email": "anil.blacktech@gmail.com",
@@ -24,6 +32,14 @@
       "newDishDescp": "descp new dish"
     },
     {
+      "staffDepartment": "Department",
+      "staffPosition": "Waiter",
+      "staffAddress": "lekhnath",
+      "staffRoles": "Receptionist",
+      "staffContact": 123456789,
+      "staffFullName": "Anjan",
+      "staffEmail": "ablacktech@gmail.com",
+      "emailForStaffInvite": "anjan.blacktech@gmail.com",
       "dishToSearch": "momo2",
       "password": 123456789,
       "email": "testblacktech2@gmail.com",
@@ -47,6 +63,14 @@
       "newDishDescp": "descp new dish"
     },
     {
+      "staffDepartment": "Department",
+      "staffPosition": "Waiter",
+      "staffAddress": "lekhnath",
+      "staffRoles": "Receptionist",
+      "staffContact": 123456789,
+      "staffFullName": "foya",
+      "staffEmail": "anjan.blacktech@gmail.com",
+      "emailForStaffInvite": "anjan.blacktech@gmail.com",
       "dishToSearch": "momo3",
       "password": 123456789,
       "email": "tech.blacktech@gmail.com",
@@ -70,6 +94,14 @@
       "newDishDescp": "descp new dish"
     },
     {
+      "staffDepartment": "Department",
+      "staffPosition": "Waiter",
+      "staffAddress": "lekhnath",
+      "staffRoles": "Receptionist",
+      "staffContact": 123456789,
+      "staffFullName": "Anjan",
+      "staffEmail": "testblacktech2@gmail.com",
+      "emailForStaffInvite": "testblacktech2@gmail.com",
       "dishToSearch": "momo4",
       "password": 123456789,
       "email": "testblacktech2@gmail.com",
@@ -93,6 +125,14 @@
       "newDishDescp": "descp new dish"
     },
     {
+      "staffDepartment": "Department",
+      "staffPosition": "Waiter",
+      "staffAddress": "lekhnath",
+      "staffRoles": "Receptionist",
+      "staffContact": 123456789,
+      "staffFullName": "Anjan",
+      "staffEmail": "anil.blacktech@gmail.com",
+      "emailForStaffInvite": "anil.blacktech@gmail.com",
       "dishToSearch": "momo5",
       "password": 123456789,
       "email": "anil.blacktech@gmail.com",

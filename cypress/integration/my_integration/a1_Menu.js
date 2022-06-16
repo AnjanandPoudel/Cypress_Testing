@@ -8,7 +8,7 @@ const PromiseResolver=async()=>{
     rowsLength=rows.length
 }
 
-describe('My First System',()=>{
+describe('Menu System',()=>{
     let menuItem="softdrinks";
     let menuDescription="NewDrinks is added";
     let tableToSearch="table007";

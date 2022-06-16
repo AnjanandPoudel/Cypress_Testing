@@ -42,7 +42,6 @@ const AddOrderFunction=(classesName,NameofTask)=>{
             
             cy.wait(500)
          }
-
          })
     })
     
@@ -187,7 +186,7 @@ const AddOrderFunction=(classesName,NameofTask)=>{
    })
 }
   
-describe('My First System',()=>{
+describe('POS System',()=>{
     let tableToSearch="Table";
     let customerToSearch="amrit";
     let staffToSearch="Anjan";
