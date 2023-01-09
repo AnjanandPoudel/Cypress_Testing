@@ -1,4 +1,4 @@
-import {RowLen} from './EXCEL'
+import { RowLen } from "./EXCEL.cy";
 
 let rowskoLength=0;
 const PromiseResolver=async()=>{

@@ -1,5 +1,5 @@
-import { loginFunctionGlobal } from "./a2_LoginSystem";
-import { RowLen } from "./EXCEL";
+import { loginFunctionGlobal } from "./a2_LoginSystem.cy";
+import { RowLen } from "./EXCEL.cy";
 
 let rowsLength=1;
 const PromiseResolver=async()=>{
@@ -50,9 +50,9 @@ describe('Staff System',()=>{
         cy.fixture('xlsxData').then((data)=>{
             for(let i=0; i<rowsLength; i++){
                 //staff
-                cy.xpath('/html/body/div/div[1]/div[2]/div/div[3]/div[1]/div/div[2]/ul/li[7]/a').click()
+                cy.xpath('/html/body/div/div[1]/div[1]/div/div[3]/div[1]/div/div[2]/ul/li[7]/a').click()
                 //create staff profile
-                cy.xpath('/html/body/div/div[1]/div[3]/div[3]/div/div/div[1]/div[1]/div/div/div/button[2]').click();
+                cy.xpath('/html/body/div/div[1]/div[2]/div[3]/div/div/div[1]/div[1]/div/div/div/button[2]').click();
                 //email
                 cy.get(`#full-name`).type(data.rows[i].staffFullName);
                 cy.get(`:nth-child(1) > #country`).type(data.rows[i].staffEmail);
@@ -84,8 +84,8 @@ describe('Staff System',()=>{
                 //staff search
                 cy.get(`#search-invoice`).clear()
                 cy.get(`#search-invoice`).type(data.rows[i].staffFullName)
-
-                cy.xpath('/html/body/div/div[1]/div[3]/div[3]/div/div/div[1]/div[2]/div/div/div/div/div[2]/div[1]').should('be.visible')
+                cy.wait(1000)
+                cy.xpath('/html/body/div/div[1]/div[2]/div[3]/div/div/div[1]/div[2]/div/div/div/div/div[2]/div[1]/div[2]').should('be.visible')
                 //click options
                 cy.xpath(`/html/body/div/div[1]/div[3]/div[3]/div/div/div[1]/div[2]/div/div/div/div/div[2]/div[1]/div[6]/div/div[1]`).click()
                 //click edit
@@ -132,7 +132,7 @@ describe('Staff System',()=>{
                 //click options
                 cy.xpath(`/html/body/div/div[1]/div[3]/div[3]/div/div/div[1]/div[2]/div/div/div/div/div[2]/div[1]/div[6]/div/div[1]`).click()
                 
-                delete
+                // delete
                 cy.xpath('/html/body/div/div[1]/div[3]/div[3]/div/div/div[1]/div[2]/div/div/div/div/div[2]/div[1]/div[6]/div/div[2]/button[2]').click()
                 cy.get('.swal2-confirm').click()
                 cy.wait(300)

@@ -45,10 +45,19 @@ module.exports=(on , config)=>{
   )
 }
 
+
+
 const readXlsx= require('./read-xlsx')
+
 
 module.exports = (on)=>{
   on('task',{
     'readXlsx':readXlsx.read
   })
 }
+
+
+// Cypress.on('uncaught:exception', (err, runnable) => {
+//   console.log(err);
+//   return false;
+// })

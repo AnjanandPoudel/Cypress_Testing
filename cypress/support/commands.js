@@ -20,12 +20,22 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('login',()=>{
-    cy.visit('',
-    cy.get('[name=loginEmail]')).type('testblacktech2@gmail.com')
-    cy.get('[name=password]').type('123456789')
-    cy.hash().should('eq','#/')
-})
+
+
+
+
+
+
+
+
+
+
+// Cypress.Commands.add('login',()=>{
+//     cy.visit('',
+//     cy.get('[name=loginEmail]')).type('testblacktech2@gmail.com')
+//     cy.get('[name=password]').type('123456789')
+//     cy.hash().should('eq','#/')
+// })
 
 Cypress.Commands.add("parseXlsx",(inputFile)=>{
     return cy.task('parseXlsx',{filePath:inputFile})
@@ -33,3 +43,24 @@ Cypress.Commands.add("parseXlsx",(inputFile)=>{
 
 
 
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+  console.log(err);
+  return false;
+})
+
+
+const COMMAND_DELAY = 500;
+
+
+for (const command of ['visit', 'click', 'trigger', 'type', 'clear', 'reload', 'contains']) {
+    Cypress.Commands.overwrite(command, (originalFn, ...args) => {
+        const origVal = originalFn(...args);
+
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(origVal);
+            }, COMMAND_DELAY);
+        });
+    });
+} 
